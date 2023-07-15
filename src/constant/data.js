@@ -11,13 +11,7 @@ export const menuItems = [
     isHide: true,
     link: "dashboard",
   },
-  {
-    title: "changelog",
-    icon: "heroicons:arrow-trending-up",
-    link: "changelog",
-    isHide: false,
-    badge: "1.0.0",
-  },
+  
   {
     isHeadr: true,
     title: "apps",
