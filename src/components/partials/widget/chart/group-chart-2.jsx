@@ -212,7 +212,7 @@ const statistics = [
     count: "3,564",
     bg: "bg-[#E5F9FF] dark:bg-slate-900	",
     text: "text-info-500",
-    icon: "heroicons:shopping-cart",
+    icon: "heroicons:wallet",
   },
   {
     name: shapeLine2,
@@ -224,7 +224,7 @@ const statistics = [
   },
   {
     name: shapeLine3,
-    title: "Growth",
+    title: "Total Events",
     count: "+5.0%",
     bg: "bg-[#EAE6FF] dark:bg-slate-900	",
     text: "text-[#5743BE]",
