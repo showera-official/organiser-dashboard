@@ -19,7 +19,7 @@ const Ecommerce = () => {
   const [filterMap, setFilterMap] = useState("usa");
   return (
     <div>
-      <HomeBredCurbs title="Ecommerce" />
+      {/* <HomeBredCurbs title={`Welcome, ${name}`} /> */}
       <div className="grid grid-cols-12 gap-5 mb-5">
         <div className="2xl:col-span-3 lg:col-span-4 col-span-12">
           <ImageBlock2 />
@@ -32,14 +32,14 @@ const Ecommerce = () => {
       </div>
       <div className="grid grid-cols-12 gap-5">
         <div className="2xl:col-span-8 lg:col-span-7 col-span-12">
-          <Card>
+          {/* <Card>
             <div className="legend-ring">
               <RevenueBarChart height={420} />
             </div>
-          </Card>
+          </Card> */}
         </div>
         <div className="2xl:col-span-4 lg:col-span-5 col-span-12">
-          <Card title="Statistic" headerslot={<SelectMonth />}>
+          {/* <Card title="Statistic" headerslot={<SelectMonth />}>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
               <OrderChart />
               <ProfitChart />
@@ -47,30 +47,30 @@ const Ecommerce = () => {
                 <EarningChart />
               </div>
             </div>
-          </Card>
+          </Card> */}
         </div>
         <div className="xl:col-span-6 col-span-12">
-          <Card title="Customer" headerslot={<SelectMonth />}>
+          {/* <Card title="Customer" headerslot={<SelectMonth />}>
             <Customer />
-          </Card>
+          </Card> */}
         </div>
         <div className="xl:col-span-6 col-span-12">
-          <Card title="Recent Orders" headerslot={<SelectMonth />} noborder>
+          {/* <Card title="Recent Orders" headerslot={<SelectMonth />} noborder>
             <RecentOrderTable />
-          </Card>
+          </Card> */}
         </div>
         <div className="xl:col-span-8 lg:col-span-7 col-span-12">
-          <Card title="Visitors Report" headerslot={<SelectMonth />}>
+          {/* <Card title="Visitors Report" headerslot={<SelectMonth />}>
             <BasicArea />
-          </Card>
+          </Card> */}
         </div>
         <div className="xl:col-span-4 lg:col-span-5 col-span-12">
-          <Card title="Visitors By Gender" headerslot={<SelectMonth />}>
+          {/* <Card title="Visitors By Gender" headerslot={<SelectMonth />}>
             <VisitorRadar />
-          </Card>
+          </Card> */}
         </div>
         <div className="xl:col-span-6 col-span-12">
-          <Card
+          {/* <Card
             title="Most Sales"
             headerslot={
               <div className="border border-slate-200 dark:border-slate-700 dark:bg-slate-900 rounded p-1 flex items-center">
@@ -102,10 +102,10 @@ const Ecommerce = () => {
             }
           >
             <MostSales2 filterMap={filterMap} />
-          </Card>
+          </Card> */}
         </div>
         <div className="xl:col-span-6 col-span-12">
-          <Card title="Best selling products" headerslot={<SelectMonth />}>
+          <Card title="Best Selling Events" headerslot="">
             <Products />
           </Card>
         </div>
