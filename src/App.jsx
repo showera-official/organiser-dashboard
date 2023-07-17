@@ -108,9 +108,11 @@ const ProjectDetailsPage = lazy(() =>
 const KanbanPage = lazy(() => import("./pages/app/kanban"));
 const CalenderPage = lazy(() => import("./pages/app/calender"));
 
-const AddEvent = lazy(()=>import("./pages/events/AddEvent"));
+// const AddEvent = lazy(()=>import("./pages/events/AddEvent"));
 import Loading from "@/components/Loading";
+import AddEvent from "./pages/events/AddEvent";
 function App() {
+
   return (
     <main className="App  relative">
       <Routes>
