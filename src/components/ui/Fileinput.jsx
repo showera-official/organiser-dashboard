@@ -1,8 +1,9 @@
+import { Icon } from "@iconify/react";
 import React from "react";
 
 const Fileinput = ({
   name,
-  label = "Browse",
+  label = "",
   onChange,
   placeholder = "Choose a file or drop it here...",
   multiple,
@@ -60,13 +61,20 @@ const Fileinput = ({
                   </span>
                 )}
                 {selectedFiles.length === 0 && (
-                  <span className="text-slate-400">{placeholder}</span>
+                  <div className="flex flex-row cursor-pointer">
+                    <div className="text-slate-400 w-1/2">{placeholder}
+                    
+                    </div>
+                    <div className="text-slate-400 w-1/2 flex flex-row justify-end pr-4">
+                <Icon icon="heroicons:arrow-up-tray" className="w-5 h-5"/>
+                    </div>
+                  </div>
                 )}
               </span>
             )}
-            <span className="file-name flex-none cursor-pointer border-l px-4 border-slate-200 dark:border-slate-700 h-full inline-flex items-center bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-base rounded-tr rounded-br font-normal">
+            {/* <span className="file-name flex-none cursor-pointer border-l px-4 border-slate-200 dark:border-slate-700 h-full inline-flex items-center bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-base rounded-tr rounded-br font-normal">
               {label}
-            </span>
+            </span> */}
           </div>
           {!multiple && preview && selectedFile && (
             <div className="w-[200px] h-[200px] mx-auto mt-6  ">
