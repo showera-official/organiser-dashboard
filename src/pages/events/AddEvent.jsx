@@ -71,104 +71,66 @@ export default function AddEvent() {
               </div>
               <div>
                 <label className="form-label" for="hf-picker">
-                  Event Carousel Images (Max 5)
-                </label>
-                <Select
-                    options={Country.getAllCountries()}
-                    getOptionLabel={(options) => {
-                      return options["name"];
-                    }}
-                    getOptionValue={(options) => {
-                      return options["name"];
-                    }}
-                    value={selectedCountry}
-                    onChange={(item) => {
-                      setSelectedCountry(item);
-                    }}
-                  />
-              </div>
-              <div>
-              <label className="form-label" for="hf-picker">
-                  Event Carousel Images (Max 5)
-                </label>
-                <Select
-                    options={State?.getStatesOfCountry(
-                      selectedCountry?.isoCode
-                    )}
-                    getOptionLabel={(options) => {
-                      return options["name"];
-                    }}
-                    getOptionValue={(options) => {
-                      return options["name"];
-                    }}
-                    value={selectedState}
-                    onChange={(item) => {
-                      setSelectedState(item);
-                    }}
-                  />
-              </div>
-              <div>
-                <label>
-                    Event Carousel Images (Max 5)
-                </label>
-                <Select
-                    options={City.getCitiesOfState(
-                      selectedState?.countryCode,
-                      selectedState?.isoCode
-                    )}
-                    getOptionLabel={(options) => {
-                      return options["name"];
-                    }}
-                    getOptionValue={(options) => {
-                      return options["name"];
-                    }}
-                    value={selectedCity}
-                    onChange={(item) => {
-                      setSelectedCity(item);
-                    }}
-                  />
-              </div>
-              
-              {/* <div>
-                <label htmlFor=" hh" className="form-label ">
                   Event Country
                 </label>
                 <Select
-                  className="react-select"
-                  classNamePrefix="select"
-                  defaultValue={furits[0]}
-                  options={furits}
-                  styles={styles}
-                  id="hh"
+                  options={Country.getAllCountries()}
+                  getOptionLabel={(options) => {
+                    return options["name"];
+                  }}
+                  getOptionValue={(options) => {
+                    return options["name"];
+                  }}
+                  value={selectedCountry}
+                  onChange={(item) => {
+                    setSelectedCountry(item);
+                  }}
                 />
               </div>
-             
               <div>
-                <label htmlFor=" hh" className="form-label ">
+                <label className="form-label" for="hf-picker">
                   Event State
                 </label>
                 <Select
-                  className="react-select"
-                  classNamePrefix="select"
-                  defaultValue={furits[0]}
-                  options={furits}
-                  styles={styles}
-                  id="hh"
+                  options={State?.getStatesOfCountry(selectedCountry?.isoCode)}
+                  getOptionLabel={(options) => {
+                    return options["name"];
+                  }}
+                  getOptionValue={(options) => {
+                    return options["name"];
+                  }}
+                  value={selectedState}
+                  onChange={(item) => {
+                    setSelectedState(item);
+                  }}
                 />
               </div>
               <div>
-                <label htmlFor=" hh" className="form-label ">
-                  Event City
-                </label>
+                <label>Event City</label>
                 <Select
-                  className="react-select"
-                  classNamePrefix="select"
-                  defaultValue={furits[0]}
-                  options={furits}
-                  styles={styles}
-                  id="hh"
+                  options={City.getCitiesOfState(
+                    selectedState?.countryCode,
+                    selectedState?.isoCode
+                  )}
+                  getOptionLabel={(options) => {
+                    return options["name"];
+                  }}
+                  getOptionValue={(options) => {
+                    return options["name"];
+                  }}
+                  value={selectedCity}
+                  onChange={(item) => {
+                    setSelectedCity(item);
+                  }}
                 />
-              </div> */}
+              </div>
+              <Textinput
+                label="PIN / ZIP Code"
+                id="pn"
+                type="text"
+                placeholder="Enter PIN / CODE"
+                preview
+              />
 
               <div>
                 <label className="form-label" for="hf-picker">
