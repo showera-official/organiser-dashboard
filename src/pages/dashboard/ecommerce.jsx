@@ -104,7 +104,7 @@ const Ecommerce = () => {
             <MostSales2 filterMap={filterMap} />
           </Card> */}
         </div>
-        <div className="xl:col-span-6 col-span-12">
+        <div className="xl:col-span-12 col-span-12">
           <Card title="Best Selling Events" headerslot="">
             <Products />
           </Card>
