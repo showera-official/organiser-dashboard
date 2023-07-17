@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Card from "../../components/ui/Card";
 import { Icon } from "@iconify/react";
 import Textinput from "@/components/ui/Textinput";
@@ -7,7 +7,8 @@ import Flatpickr from "react-flatpickr";
 import Textarea from "@/components/ui/Textarea";
 import Select from "react-select";
 import { Country, State, City } from "country-state-city";
-
+import { Tab, Disclosure, Transition } from "@headlessui/react";
+import Accordion from "@/components/ui/Accordion";
 export default function AddEvent() {
   //States to hold and send data
   const [selectedFile2, setSelectedFile2] = useState(null);
@@ -36,128 +37,31 @@ export default function AddEvent() {
       fontSize: "14px",
     }),
   };
-  const furits = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+  const EventType = [
+    { value: "online", label: "Online" },
+    { value: "offline", label: "Offline" },
+  ];
+  const EventType2 = [
+    { value: "paid", label: "Paid" },
+    { value: "free", label: "Free" },
   ];
 
   return (
     <>
       <div>
         <Card title={"Add New Event"}>
-          <div className="w-full px-2 py-1 flex md:flex-row flex-wrap flex-column ">
-            <div className="md:w-1/2 px-3 py-1 w-full flex flex-col gap-y-4 ">
-              <Textinput
-                label="Event Name"
-                id="pn"
-                type="text"
-                placeholder="Add Event Name"
-                preview
-              />
-              <div>
-                <Textarea
-                  label="Event Description"
-                  id="pn4"
-                  placeholder="Add Event Description"
-                />
-              </div>
-              <div>
-                <Textarea
-                  label="Event Address"
-                  id="pn4"
-                  placeholder="Add Event Address"
-                />
-              </div>
-              <div>
-                <label className="form-label" for="hf-picker">
-                  Event Country
-                </label>
-                <Select
-                  options={Country.getAllCountries()}
-                  getOptionLabel={(options) => {
-                    return options["name"];
-                  }}
-                  getOptionValue={(options) => {
-                    return options["name"];
-                  }}
-                  value={selectedCountry}
-                  onChange={(item) => {
-                    setSelectedCountry(item);
-                  }}
-                />
-              </div>
-              <div>
-                <label className="form-label" for="hf-picker">
-                  Event State
-                </label>
-                <Select
-                  options={State?.getStatesOfCountry(selectedCountry?.isoCode)}
-                  getOptionLabel={(options) => {
-                    return options["name"];
-                  }}
-                  getOptionValue={(options) => {
-                    return options["name"];
-                  }}
-                  value={selectedState}
-                  onChange={(item) => {
-                    setSelectedState(item);
-                  }}
-                />
-              </div>
-              <div>
-                <label>Event City</label>
-                <Select
-                  options={City.getCitiesOfState(
-                    selectedState?.countryCode,
-                    selectedState?.isoCode
-                  )}
-                  getOptionLabel={(options) => {
-                    return options["name"];
-                  }}
-                  getOptionValue={(options) => {
-                    return options["name"];
-                  }}
-                  value={selectedCity}
-                  onChange={(item) => {
-                    setSelectedCity(item);
-                  }}
-                />
-              </div>
-              <Textinput
-                label="PIN / ZIP Code"
-                id="pn"
-                type="text"
-                placeholder="Enter PIN / CODE"
-                preview
-              />
-
-              <div>
-                <label className="form-label" for="hf-picker">
-                  Event Cover Image
-                </label>
-                <Fileinput
-                  name="basic"
-                  selectedFile={selectedFile2}
-                  onChange={handleFileChange2}
-                  preview
-                />
-              </div>
-              <div>
-                <label className="form-label" for="hf-picker">
-                  Event Carousel Images (Max 5)
-                </label>
-                <Fileinput
-                  name="basic"
-                  selectedFiles={selectedCarousel2}
-                  onChange={handleFileChangeMultiple2}
-                  multiple
-                  preview
-                />
-              </div>
-            </div>
-            <div className="md:w-1/2 px-3 py-1 w-full flex flex-col gap-y-4">
-              <div>
+          <div className=" py-2 px-4 w-full">
+            <Textinput
+              label="Event Name"
+              id="pn"
+              type="text"
+              placeholder="Add Event Name"
+              preview
+            />
+          </div>
+          <div className="w-full px-2 py-1 flex flex-wrap flex-column ">
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
+              <div className="md:w-1/2 w-full px-2">
                 <label className="form-label" for="hf-picker">
                   Event Start Date
                 </label>
@@ -173,7 +77,7 @@ export default function AddEvent() {
                   }}
                 />
               </div>
-              <div>
+              <div className="md:w-1/2 w-full px-2">
                 <label className="form-label" for="hf-picker">
                   Event End Date
                 </label>
@@ -189,7 +93,9 @@ export default function AddEvent() {
                   }}
                 />
               </div>
-              <div>
+            </div>
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
+              <div className="md:w-1/2 w-full px-2">
                 <label className="form-label" id="timepicker">
                   Event Start Time
                 </label>
@@ -206,7 +112,7 @@ export default function AddEvent() {
                   onChange={(date) => setBasic(date)}
                 />
               </div>
-              <div>
+              <div className="md:w-1/2 w-full px-2">
                 <label className="form-label" id="timepicker">
                   Event End Time
                 </label>
@@ -221,6 +127,109 @@ export default function AddEvent() {
                     time_24hr: true,
                   }}
                   onChange={(date) => setBasic(date)}
+                />
+              </div>
+            </div>
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
+              <div className="md:w-1/2 w-full px-2">
+                <label className="form-label" id="timepicker">
+                  Select Event Type
+                </label>
+                <Select
+                  className="react-select"
+                  classNamePrefix="select"
+                  defaultValue={EventType[1]}
+                  options={EventType}
+                  styles={styles}
+                  id="hh"
+                />
+              </div>
+              <div className="md:w-1/2 w-full px-2">
+                <label className="form-label" id="timepicker">
+                  Is Event Paid or Free ?
+                </label>
+                <Select
+                  className="react-select"
+                  classNamePrefix="select"
+                  defaultValue={EventType2[1]}
+                  options={EventType2}
+                  styles={styles}
+                  id="hh"
+                />
+              </div>
+            </div>
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
+              <div className="md:w-1/2 w-full px-2">
+                <Textarea
+                  label="Event Address"
+                  id="pn4"
+                  placeholder="Add Event Address"
+                />
+              </div>
+              <div className="md:w-1/2 w-full px-2">
+                <label className="form-label" id="timepicker">
+                  Select Event Country
+                </label>
+                <Select
+                  className="react-select"
+                  classNamePrefix="select"
+                  options={Country.getAllCountries()}
+                  getOptionLabel={(options) => {
+                    return options["name"];
+                  }}
+                  getOptionValue={(options) => {
+                    return options["name"];
+                  }}
+                  value={selectedCountry}
+                  onChange={(item) => {
+                    setSelectedCountry(item);
+                  }}
+                  styles={styles}
+                />
+              </div>
+            </div>
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
+              <div className="md:w-1/2 w-full px-2">
+                <label className="form-label" id="timepicker">
+                  Select Event State
+                </label>
+                <Select
+                  className="react-select"
+                  classNamePrefix="select"
+                  options={State?.getStatesOfCountry(selectedCountry?.isoCode)}
+                  getOptionLabel={(options) => {
+                    return options["name"];
+                  }}
+                  getOptionValue={(options) => {
+                    return options["name"];
+                  }}
+                  value={selectedState}
+                  onChange={(item) => {
+                    setSelectedState(item);
+                  }}
+                />
+              </div>
+              <div className="md:w-1/2 w-full px-2">
+                <label className="form-label" id="timepicker">
+                  Select Event City
+                </label>
+                <Select
+                  className="react-select"
+                  classNamePrefix="select"
+                  options={City.getCitiesOfState(
+                    selectedState?.countryCode,
+                    selectedState?.isoCode
+                  )}
+                  getOptionLabel={(options) => {
+                    return options["name"];
+                  }}
+                  getOptionValue={(options) => {
+                    return options["name"];
+                  }}
+                  value={selectedCity}
+                  onChange={(item) => {
+                    setSelectedCity(item);
+                  }}
                 />
               </div>
             </div>
