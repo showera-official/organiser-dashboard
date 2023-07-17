@@ -9,11 +9,8 @@ import Select from "react-select";
 import { Country, State, City } from "country-state-city";
 import { Tab, Disclosure, Transition } from "@headlessui/react";
 import Accordion from "@/components/ui/Accordion";
-import Button from "@/components/ui/Button";
-import { set } from "react-hook-form";
 export default function AddEvent() {
   //States to hold and send data
-  const [picker, setPicker] = useState(new Date());
   const [selectedFile2, setSelectedFile2] = useState(null);
   const [selectedCarousel2, setSelectedCarousel2] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -22,9 +19,6 @@ export default function AddEvent() {
   const [startDatePicker, setStartDatePicker] = useState(new Date());
   const [eventStartTime, setEventStartTime] = useState(new Date());
   const [eventEndTime, setEventEndTime] = useState(new Date());
-  const [eventType, setEventType] = useState("");
-  const [hiddenVenue, setHiddenVenue] = useState("");
-  const [linkArea, setLinkArea] = useState("hidden");
 
   //fucntions to manage file inputs
   const handleFileChange2 = (e) => {
@@ -35,15 +29,6 @@ export default function AddEvent() {
     const files = e.target.files;
     const filesArray = Array.from(files).map((file) => file);
     setSelectedCarousel2(filesArray);
-  };
-
-  const handleSelectChange = (name, value) => {
-    console.log(name, value);
-    switch (name) {
-      case "eventType":
-        setEventEndTime(value);
-        break;
-    }
   };
 
   const styles = {
@@ -60,7 +45,6 @@ export default function AddEvent() {
     { value: "paid", label: "Paid" },
     { value: "free", label: "Free" },
   ];
-
   return (
     <>
       <div>
@@ -72,13 +56,6 @@ export default function AddEvent() {
               type="text"
               placeholder="Add Event Name"
               preview
-            />
-          </div>
-          <div className=" py-2 px-4 w-full">
-            <Textarea
-              label="Event Description"
-              id="pn4"
-              placeholder="Add Event Description"
             />
           </div>
           <div className="w-full px-2 py-1 flex flex-wrap flex-column ">
@@ -140,7 +117,7 @@ export default function AddEvent() {
                 </label>
                 <Flatpickr
                   className="form-control py-2"
-                  value={eventEndTime}
+                  value={eventStartTime}
                   id="timepicker"
                   options={{
                     enableTime: true,
@@ -160,11 +137,7 @@ export default function AddEvent() {
                 <Select
                   className="react-select"
                   classNamePrefix="select"
-                  onChange={(e) => {
-                    handleSelectChange("eventType", e);
-                    setHiddenVenue(e.value === "online" ? "hidden" : "");
-                    setLinkArea(e.value === "online" ? "" : "hidden");
-                  }}
+                  defaultValue={EventType[1]}
                   options={EventType}
                   styles={styles}
                   id="hh"
@@ -184,9 +157,7 @@ export default function AddEvent() {
                 />
               </div>
             </div>
-            <div
-              className={`w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ${hiddenVenue}`}
-            >
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
               <div className="md:w-1/2 w-full px-2">
                 <Textarea
                   label="Venue"
@@ -216,9 +187,7 @@ export default function AddEvent() {
                 />
               </div>
             </div>
-            <div
-              className={`w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ${hiddenVenue}`}
-            >
+            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
               <div className="md:w-1/2 w-full px-2">
                 <label className="form-label" id="timepicker">
                   Select Event State
@@ -261,48 +230,6 @@ export default function AddEvent() {
                     setSelectedCity(item);
                   }}
                 />
-              </div>
-            </div>
-            <div className={`py-2 px-2 w-full ${linkArea}`}>
-              <Textinput
-                label="Event Link"
-                id="pn"
-                type="text"
-                placeholder="Add Event Link"
-                preview
-              />
-            </div>
-            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
-              <div className="md:w-1/2 w-full px-2">
-                <label className="form-label" id="timepicker">
-                  Upload Cover Image
-                </label>
-                <Fileinput
-                  name="basic"
-                  selectedFile={selectedFile2}
-                  onChange={handleFileChange2}
-                  preview
-                />
-              </div>
-              <div className="md:w-1/2 w-full px-2">
-                <label className="form-label" id="timepicker">
-                  Upload Carousel Images
-                </label>
-                <Fileinput
-                  name="basic"
-                  selectedFiles={selectedCarousel2}
-                  onChange={handleFileChangeMultiple2}
-                  multiple
-                  preview
-                />
-              </div>
-            </div>
-            <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
-              <div className="md:w-1/2 w-full px-2">
-                <label className="form-label" id="timepicker"></label>
-              </div>
-              <div className="md:w-1/2 w-full px-2 mt-4 flex flex-row justify-end">
-                <Button text="Create Event" className="btn-dark" />
               </div>
             </div>
           </div>
