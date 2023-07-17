@@ -14,59 +14,66 @@ export const menuItems = [
   
   {
     isHeadr: true,
-    title: "apps",
+    title: "manage events",
   },
 
   {
-    title: "Chat",
+    title: "Add New Event",
     isHide: true,
-    icon: "heroicons-outline:chat",
-    link: "chat",
+    icon: "heroicons-outline:calendar-days",
+    link: "addevent",
   },
-
   {
-    title: "Email",
+    title: "Manage Events",
     isHide: true,
-    icon: "heroicons-outline:mail",
+    icon: "heroicons-outline:pencil-square",
     link: "email",
   },
 
-  {
-    title: "Kanban",
-    isHide: true,
-    icon: "heroicons-outline:view-boards",
-    link: "kanban",
-  },
-  {
-    title: "Calender",
-    isHide: true,
-    icon: "heroicons-outline:calendar",
-    link: "calender",
-  },
 
-  {
-    title: "Todo",
-    isHide: true,
-    icon: "heroicons-outline:clipboard-check",
-    link: "todo",
-  },
+  // {
+  //   title: "Email",
+  //   isHide: true,
+  //   icon: "heroicons-outline:mail",
+  //   link: "email",
+  // },
 
-  {
-    title: "Projects",
-    icon: "heroicons-outline:document",
-    link: "#",
-    isHide: true,
-    child: [
-      {
-        childtitle: "Projects",
-        childlink: "projects",
-      },
-      {
-        childtitle: "Project Details",
-        childlink: "project-details",
-      },
-    ],
-  },
+  // {
+  //   title: "Kanban",
+  //   isHide: true,
+  //   icon: "heroicons-outline:view-boards",
+  //   link: "kanban",
+  // },
+  // {
+  //   title: "Calender",
+  //   isHide: true,
+  //   icon: "heroicons-outline:calendar",
+  //   link: "calender",
+  // },
+
+  // {
+  //   title: "Todo",
+  //   isHide: true,
+  //   icon: "heroicons-outline:clipboard-check",
+  //   link: "todo",
+  // },
+
+  // {
+  //   title: "Projects",
+  //   icon: "heroicons-outline:document",
+  //   link: "#",
+  //   isHide: true,
+  //   child: [
+  //     {
+  //       childtitle: "Projects",
+  //       childlink: "projects",
+  //     },
+  //     {
+  //       childtitle: "Project Details",
+  //       childlink: "project-details",
+  //     },
+  //   ],
+  // },
   {
     isHeadr: true,
     title: "Pages",
