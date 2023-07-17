@@ -942,6 +942,11 @@
     "path-type" "^4.0.0"
     "yaml" "^1.10.0"
 
+"country-state-city@^3.1.4":
+  "integrity" "sha512-gULjY6rojfdTbgBoPXYbcnmS0SSFzRJl+/jgS/IIxraI7l4YVbT/Jb53OFujJwrQP4d19YC7yWIDHyxtMxgHVQ=="
+  "resolved" "https://registry.npmjs.org/country-state-city/-/country-state-city-3.1.4.tgz"
+  "version" "3.1.4"
+
 "css-box-model@^1.2.0":
   "integrity" "sha512-a7Vr4Q/kd/aw96bnJG332W9V9LkJO69JRcaCYDUqjp6/z0w6VcZjgAcTbgFxEPfBgdnAwlh3iwu+hLopa+flJw=="
   "resolved" "https://registry.npmjs.org/css-box-model/-/css-box-model-1.2.1.tgz"
