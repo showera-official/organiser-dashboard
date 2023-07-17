@@ -107,6 +107,8 @@ const ProjectDetailsPage = lazy(() =>
 );
 const KanbanPage = lazy(() => import("./pages/app/kanban"));
 const CalenderPage = lazy(() => import("./pages/app/calender"));
+
+const AddEvent = lazy(()=>import("./pages/events/AddEvent"));
 import Loading from "@/components/Loading";
 function App() {
   return (
@@ -210,14 +212,14 @@ function App() {
         />
         <Route path="/*" element={<Layout />}>
           <Route path="dashboard" element={<Ecommerce />} />
-          {/* <Route path="ecommerce" element={<Ecommerce />} />
-          <Route path="crm" element={<CrmPage />} />
+          {/* <Route path="ecommerce" element={<Ecommerce />} /> */}
+          {/* <Route path="crm" element={<CrmPage />} />
           <Route path="project" element={<ProjectPage />} />
           <Route path="banking" element={<BankingPage />} /> */}
           {/* App pages */}
           <Route path="todo" element={<TodoPage />} />
           <Route path="email" element={<EmailPage />} />
-          <Route path="chat" element={<ChatPage />} />
+          <Route path="addevent" element={<AddEvent />} />
           <Route path="projects" element={<ProjectPostPage />} />
           <Route path={"projects/:id"} element={<ProjectDetailsPage />} />
           <Route path="project-details" element={<ProjectDetailsPage />} />
