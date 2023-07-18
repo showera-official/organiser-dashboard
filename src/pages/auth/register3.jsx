@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RegForm from "./common/reg-from";
+import RegForm2 from "./common/reg-form2";
 import Social from "./common/social";
 import { ToastContainer } from "react-toastify";
 import useDarkMode from "@/hooks/useDarkMode";
@@ -46,7 +46,7 @@ const register3 = () => {
                   Create an account to start using Dashcode
                 </div>
               </div>
-              <RegForm />
+              <RegForm2 />
               <div className=" relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
                 <div className=" absolute inline-block  bg-white dark:bg-slate-800 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm  text-slate-500  dark:text-slate-400font-normal ">
                   Or continue with
