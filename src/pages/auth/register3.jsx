@@ -5,8 +5,8 @@ import Social from "./common/social";
 import { ToastContainer } from "react-toastify";
 import useDarkMode from "@/hooks/useDarkMode";
 // image import
-import LogoWhite from "@/assets/images/logo/logo-white.svg";
-import Logo from "@/assets/images/logo/logo.svg";
+import LogoWhite from "@/assets/images/logo/logo-c-white.png";
+import Logo from "@/assets/images/logo/logo-c.png";
 import bgImage from "@/assets/images/all-img/login-bg.png";
 const register3 = () => {
   const [isDark] = useDarkMode();
@@ -16,14 +16,20 @@ const register3 = () => {
       <div
         className="loginwrapper bg-cover bg-no-repeat bg-center"
         style={{
-          backgroundImage: `url(${bgImage})`,
+          backgroundColor: "#210042",
         }}
       >
         <div className="lg-inner-column">
           <div className="left-columns lg:w-1/2 lg:block hidden">
             <div className="logo-box-3">
               <Link to="/" className="">
-                <img src={LogoWhite} alt="" className="mb-10" />
+                <img
+                  src={LogoWhite}
+                  alt=""
+                  className="mb-10"
+                  height={400}
+                  width={400}
+                />
               </Link>
             </div>
           </div>
@@ -35,6 +41,8 @@ const register3 = () => {
                     src={isDark ? LogoWhite : Logo}
                     alt=""
                     className="mx-auto"
+                    height={80}
+                    width={90}
                   />
                 </Link>
               </div>
@@ -43,7 +51,7 @@ const register3 = () => {
                   Sign up
                 </h4>
                 <div className="text-slate-500 dark:text-slate-400 text-base">
-                  Create an account to start using Dashcode
+                  Create an account to start using Showera
                 </div>
               </div>
               <RegForm2 />
@@ -67,7 +75,7 @@ const register3 = () => {
             </div>
           </div>
           <div className="auth-footer3 text-white py-5 px-5 text-xl w-full">
-            Unlock your Project performance
+            
           </div>
         </div>
       </div>
