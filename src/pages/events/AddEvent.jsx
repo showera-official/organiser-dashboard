@@ -11,6 +11,8 @@ import { Tab, Disclosure, Transition } from "@headlessui/react";
 import Accordion from "@/components/ui/Accordion";
 import Button from "@/components/ui/Button";
 import { set } from "react-hook-form";
+import AddTicketType from "./addTicketType";
+
 export default function AddEvent() {
   //States to hold and send data
   const [picker, setPicker] = useState(new Date());
@@ -25,6 +27,7 @@ export default function AddEvent() {
   const [eventType, setEventType] = useState("");
   const [hiddenVenue, setHiddenVenue] = useState("");
   const [linkArea, setLinkArea] = useState("hidden");
+  const [isDataSubmitted, setIsDataSubmitted] = useState(false);
 
   //fucntions to manage file inputs
   const handleFileChange2 = (e) => {
@@ -307,6 +310,10 @@ export default function AddEvent() {
             </div>
           </div>
         </Card>
+        <div className="my-4">
+
+          <AddTicketType/>
+        </div>
       </div>
     </>
   );
