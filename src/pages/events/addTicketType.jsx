@@ -69,7 +69,7 @@ const AddTicketType = () => {
                   <Select
                     label="Ticket Status"
                     className="react-select"
-                    classNamePrefix="select"
+                    classNameprefix="select"
                     placeholder="Select Ticket Status"
                     register={register}
                     name="ticketStatus"

@@ -11,9 +11,10 @@ import { Tab, Disclosure, Transition } from "@headlessui/react";
 import Accordion from "@/components/ui/Accordion";
 import Button from "@/components/ui/Button";
 import { set } from "react-hook-form";
-import axios from "../auth/common/axios";
+import axios from "axios";
 import AddTicketType from "./addTicketType";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export default function AddEvent() {
   //States to hold and send data
@@ -121,11 +122,7 @@ export default function AddEvent() {
       setIsSubmitting(false);
       return toast.error("Please fill all the fields");
     }
-    // if (eventType.value === "online" && !eventLink) {
-    //   setLoading(false);
-    //   setIsSubmitting(false);
-    //   return toast.error("Please provide the event Link");
-    // }
+
 
     if (
       eventLink.match(
@@ -147,7 +144,7 @@ export default function AddEvent() {
     // passwrod regex only numbers
 
     axios
-      .post("/event/create", {
+      .post("https://tame-teal-tortoise-wrap.cyclic.app/api/v1/event/create", {
         event_name: formData.eventName,
         event_mode: eventType.value,
         event_timezone: "UTC",
@@ -159,6 +156,12 @@ export default function AddEvent() {
         event_is_active: eventStatus.value,
         // eventVenue: formData.eventVenue + ", " + selectedCity + ", " + selectedState + ", " + selectedCountry,
       },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      }
     )
       .then((res) => {
         setLoading(false);

@@ -116,7 +116,7 @@ const LoginForm = () => {
       .then((res) => {
         setLoading(false);
         console.log(res.data);
-        console.log(res.data.token);
+        console.log(res.data.data.token);
         Cookies.set("token", res.data.data.token, { expires: 7 });
         Cookies.set("data", res.data);
         Cookies.set("statusCode", res.data.statusCode);
