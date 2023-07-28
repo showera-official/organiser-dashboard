@@ -123,11 +123,11 @@ const LoginForm = () => {
         setIsSubmitting(false);
         toast.success(res.data.message);
         
-       if(res.message == "Login Successful"){
+      
         setTimeout(() => {
           navigate("/dashboard");
         }, 1500);
-       }
+       
       })
       .catch((err) => {
         console.log(err);
