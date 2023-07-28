@@ -117,13 +117,13 @@ const LoginForm = () => {
         setLoading(false);
         console.log(res.data);
         console.log(res.data.token);
-        Cookies.set("token", res.data.token, { expires: 7 });
+        Cookies.set("token", res.data.data.token, { expires: 7 });
         Cookies.set("data", res.data);
         Cookies.set("statusCode", res.data.statusCode);
         setIsSubmitting(false);
         toast.success(res.data.message);
         
-       if(res.success= true){
+       if(res.message == "Login Successful"){
         setTimeout(() => {
           navigate("/dashboard");
         }, 1500);
