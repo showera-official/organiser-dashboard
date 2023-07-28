@@ -47,27 +47,26 @@ const LoginForm = () => {
     //
     mode: "all",
   });
-  // const navigate = useNavigate();
-  // const onSubmit = (data) => {
-    
-  //   if (user) {
-  //     dispatch(handleLogin(true));
-  //     setTimeout(() => {
-  //       navigate("/dashboard");
-  //     }, 1500);
-  //   } else {
-  //     toast.error("Invalid credentials", {
-  //       position: "top-right",
-  //       autoClose: 1500,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //   }
-  // };
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    if (user) {
+      dispatch(handleLogin(true));
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
+    } else {
+      toast.error("Invalid credentials", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
 
   const [checked, setChecked] = useState(false);
   const handleSignIn = (e) => {
@@ -111,23 +110,23 @@ const LoginForm = () => {
 
     axios
       .post("/auth/login", {
-        name: formData.name,
         phone: formData.phone,
         password: formData.password,
-        comparepasword: formData.comparepassword,
-        
       })
       .then((res) => {
         setLoading(false);
         console.log(res.data);
         Cookies.set("token", res.data.token, { expires: 7 });
         Cookies.set("data", res.data);
+        Cookies.set("statusCode", res.data.statusCode);
         setIsSubmitting(false);
         toast.success(res.data.message);
 
+       if(res.success= true){
         setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
+          navigate("/dashboard");
+        }, 1500);
+       }
       })
       .catch((err) => {
         console.log(err);
@@ -138,17 +137,19 @@ const LoginForm = () => {
         toast.error(err.response.data.message);
       });
   };
-  return loading?(<Loading/>):(
+  return loading ? (
+    <Loading />
+  ) : (
     <form onSubmit={handleSubmit} className="space-y-4 ">
-        <Textinput
-          name="phone"
-          label="phone"
-          type="number"
-          onChange={handleChange}
-          placeholder="Enter Phone Number"
-          register={register}
-          error={errors.phone}
-        />
+      <Textinput
+        name="phone"
+        label="phone"
+        type="number"
+        onChange={handleChange}
+        placeholder="Enter Phone Number"
+        register={register}
+        error={errors.phone}
+      />
       <Textinput
         name="password"
         label="passwrod"
@@ -173,7 +174,12 @@ const LoginForm = () => {
         </Link>
       </div>
 
-      <button className="btn btn-dark block w-full text-center" onClick={handleSignIn}>Sign in</button>
+      <button
+        className="btn btn-dark block w-full text-center"
+        onClick={handleSignIn}
+      >
+        Sign in
+      </button>
     </form>
   );
 };
