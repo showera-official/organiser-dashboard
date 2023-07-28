@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, Fragment, useRef,useState } from "react";
+import React, { useEffect, Suspense, Fragment, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Header from "@/components/partials/header";
 import Sidebar from "@/components/partials/sidebar";
@@ -18,22 +18,24 @@ import { useSelector } from "react-redux";
 import Loading from "@/components/Loading";
 import { motion, AnimatePresence } from "framer-motion";
 import Cookies from "js-cookie";
+import { useState } from "react";
 const Layout = () => {
   const { width, breakpoints } = useWidth();
   const [collapsed] = useSidebar();
   const navigate = useNavigate();
   const { isAuth } = useSelector((state) => state.auth);
-  const [token, setToken] = useState(null);
-  if (Cookies.get("token")) {
-    setToken(Cookies.get("token"));
-  }
-  useEffect(() => {
-  
-    if (!token) {
+  const [token, setToken] = useState(Cookies.get("token"));
+
+  useEffect(()=>{
+    if(!token){
       navigate("/");
     }
-  }, [token]);
-  
+  }, token);
+  // useEffect(() => {
+  //   if (!isAuth) {
+  //     navigate("/");
+  //   }
+  // }, [isAuth, navigate]);
   const switchHeaderClass = () => {
     if (menuType === "horizontal" || menuHidden) {
       return "ltr:ml-0 rtl:mr-0";
