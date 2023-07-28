@@ -123,7 +123,6 @@ const LoginForm = () => {
         setIsSubmitting(false);
         toast.success(res.data.message);
         
-      
         setTimeout(() => {
           navigate("/dashboard");
         }, 1500);
