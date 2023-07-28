@@ -111,6 +111,7 @@ const CalenderPage = lazy(() => import("./pages/app/calender"));
 // const AddEvent = lazy(()=>import("./pages/events/AddEvent"));
 import Loading from "@/components/Loading";
 import AddEvent from "./pages/events/AddEvent";
+import ManageEvent from "./pages/events/manageEvents";
 function App() {
 
   return (
@@ -222,6 +223,7 @@ function App() {
           <Route path="todo" element={<TodoPage />} />
           <Route path="email" element={<EmailPage />} />
           <Route path="addevent" element={<AddEvent />} />
+          <Route path="manageEvent" element={<ManageEvent />} />
           <Route path="projects" element={<ProjectPostPage />} />
           <Route path={"projects/:id"} element={<ProjectDetailsPage />} />
           <Route path="project-details" element={<ProjectDetailsPage />} />
