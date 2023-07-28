@@ -17,17 +17,21 @@ import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 import Loading from "@/components/Loading";
 import { motion, AnimatePresence } from "framer-motion";
+import Cookies from "js-cookie";
 const Layout = () => {
   const { width, breakpoints } = useWidth();
   const [collapsed] = useSidebar();
   const navigate = useNavigate();
   const { isAuth } = useSelector((state) => state.auth);
-
+  const [token, setToken] = useState(null);
+  if (Cookies.get("token")) {
+    setToken(Cookies.get("token"));
+  }
   useEffect(() => {
-    if (!isAuth) {
+    if (!token) {
       navigate("/");
     }
-  }, [isAuth, navigate]);
+  }, [token]);
   const switchHeaderClass = () => {
     if (menuType === "horizontal" || menuHidden) {
       return "ltr:ml-0 rtl:mr-0";
