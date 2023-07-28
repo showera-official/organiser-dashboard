@@ -28,10 +28,12 @@ const Layout = () => {
     setToken(Cookies.get("token"));
   }
   useEffect(() => {
+  
     if (!token) {
       navigate("/");
     }
   }, [token]);
+  
   const switchHeaderClass = () => {
     if (menuType === "horizontal" || menuHidden) {
       return "ltr:ml-0 rtl:mr-0";
