@@ -30,7 +30,7 @@ const Layout = () => {
     if(!token){
       navigate("/");
     }
-  }, token);
+  }, []);
   // useEffect(() => {
   //   if (!isAuth) {
   //     navigate("/");

@@ -170,7 +170,7 @@ export default function AddEvent() {
         toast.success(res.data.message);
 
         setTimeout(() => {
-          window.location.href = "/register3";
+          window.location.href = "/addevent";
         }, 2000);
       })
       .catch((err) => {

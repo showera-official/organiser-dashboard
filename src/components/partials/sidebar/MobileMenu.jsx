@@ -11,9 +11,9 @@ import useMobileMenu from "@/hooks/useMobileMenu";
 import Icon from "@/components/ui/Icon";
 
 // import images
-import MobileLogo from "@/assets/images/logo/logo-c.svg";
-import MobileLogoWhite from "@/assets/images/logo/logo-c-white.svg";
-import svgRabitImage from "@/assets/images/svg/rabit.svg";
+import MobileLogo from "@/assets/images/logo/logo-c.png";
+import MobileLogoWhite from "@/assets/images/logo/logo-c-white.png";
+
 
 const MobileMenu = ({ className = "custom-class" }) => {
   const scrollableNodeRef = useRef();
@@ -43,9 +43,9 @@ const MobileMenu = ({ className = "custom-class" }) => {
           <div className="flex items-center space-x-4">
             <div className="logo-icon">
               {!isDark && !isSemiDark ? (
-                <img src={MobileLogo} alt="" />
+                <img src={MobileLogo} alt="" width={50}/>
               ) : (
-                <img src={MobileLogoWhite} alt="" />
+                <img src={MobileLogoWhite} alt="" width={50} />
               )}
             </div>
             <div>
