@@ -107,7 +107,7 @@ const ProjectDetailsPage = lazy(() =>
 );
 const KanbanPage = lazy(() => import("./pages/app/kanban"));
 const CalenderPage = lazy(() => import("./pages/app/calender"));
-
+const AddTicket = lazy(() => import("./pages/events/AddTicket"));
 // const AddEvent = lazy(()=>import("./pages/events/AddEvent"));
 import Loading from "@/components/Loading";
 import AddEvent from "./pages/events/AddEvent";
@@ -224,6 +224,7 @@ function App() {
           <Route path="email" element={<EmailPage />} />
           <Route path="addevent" element={<AddEvent />} />
           <Route path="manageEvent" element={<ManageEvent />} />
+          <Route path="addticket" element={<AddTicket />} />
           <Route path="projects" element={<ProjectPostPage />} />
           <Route path={"projects/:id"} element={<ProjectDetailsPage />} />
           <Route path="project-details" element={<ProjectDetailsPage />} />

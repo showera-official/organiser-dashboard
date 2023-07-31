@@ -29,6 +29,12 @@ export const menuItems = [
     icon: "heroicons-outline:pencil-square",
     link: "email",
   },
+  {
+  title: "Add Tickets",
+  isHide: true,
+  icon: "heroicons-outline:ticket",
+  link: "addticket",
+  },
 
 
   // {
