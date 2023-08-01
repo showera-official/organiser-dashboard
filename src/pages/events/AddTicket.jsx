@@ -6,108 +6,102 @@ import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
 import Flatpickr from "react-flatpickr";
 import Tooltip from "@/components/ui/Tooltip";
-import { useForm, useFieldArray } from "react-hook-form";
-
+import axios from "../../axios";
+import { useEffect, useState } from "react";
 import Select from "react-select";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 const AddTicket = () => {
-  const { register, control, handleSubmit, reset, trigger, setError } = useForm(
-    {
-      defaultValues: {
-        test: [{ firstName: "Bill", lastName: "Luo", phone: "123456" }],
-      },
-    }
-  );
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "test",
+  // States for handling fields
+  const [fields, setFields] = useState(); // to store all events data
+  const [event, setEvent] = useState(); // to store selected event
+  const [ticketStartDate, setTicketStartDate] = useState(new Date());
+  const [ticketEndDate, setTicketEndDate] = useState(new Date());
+  const [formData, setFormData] = useState({
+    // to store ticket form data
+    ticket_name: "",
+    ticket_description: "",
+    ticket_price: "",
+    ticket_quantity: "",
+    ticket_max_purchase: "",
+    ticket_start_date: ticketStartDate,
+    ticket_end_date: ticketEndDate,
   });
+
+  //React Select element style
   const styles = {
     option: (provided, state) => ({
       ...provided,
       fontSize: "14px",
     }),
   };
-  const index = 1;
-  const EventStatus = [
-    { value: "hidden", label: "Hidden" },
-    { value: "waitlist", label: "Waitlist" },
-    { value: "published", label: "Published" },
-  ];
-  const Events = [
-    { value: "12365", label: "Event 1" },
-    { value: "12366", label: "Event 2" },
-    { value: "12367", label: "Event 3" },
-  ];
+
+  // API call to get List of all events
+  useEffect(() => {
+    axios
+      .get("/event", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      })
+
+      .then((res) => {
+        console.log(res.data.data);
+        setFields(res.data.data);
+      });
+  }, []);
+
+  // function to handle changes in ticket form fields
+  function handleChange(e) {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [e.target.name]: e.target.value,
+    }));
+    console.log(formData);
+  }
+
+  const handleSelectChange = (name, value) => {
+    console.log(name, value);
+    switch (name) {
+      case "event":
+        setEvent(value);
+        break;
+    }
+  };
+
+  function handleTicketCreate() {
+    axios
+      .post(
+        "/ticket",
+        {
+          ticket_name: formData.ticket_name,
+          ticket_price: formData.ticket_price,
+          ticket_description: formData.ticket_description,
+          ticket_quantity: formData.ticket_quantity,
+          ticket_start_date: formData.ticket_start_date,
+          ticket_end_date: formData.ticket_end_date,
+          ticket_max_purchase: formData.ticket_max_purchase,
+          event_id: event,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setFormData("");
+        toast.success("Ticket Added Successfully");
+      })
+      .catch((err) => console.log(err));
+
+  }
   return (
     <div>
-      <Card
-        title="Add Tickets"
-        // headerslot={
-
-        //     <Select
-        //       className="react-select w-full"
-        //       classNamePrefix="select"
-        //       label="Event"
-        //       options={Events}
-        //       styles={styles}
-        //       id="hh"
-        //       name="eventType"
-        //     />
-
-        // }
-      >
-        {/* <form onSubmit={handleSubmit((data) => console.log(data))}>
-          {fields.map((item, index) => (
-            <div
-              className="lg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid gap-5 mb-5 last:mb-0"
-              key={index}
-            >
-              <Textinput
-                label="Ticket Name"
-                type="text"
-                placeholder="Enter Ticket Name"
-                register={register}
-                name="ticketName"
-              />
-
-              <Textinput
-                label="Price"
-                type="number"
-                placeholder="Last Name"
-                register={register}
-                name="price"
-              />
-
-              <div className="flex justify-between items-end space-x-5">
-                <div className="flex-1">
-                  <Select
-                    label="Ticket Status"
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Ticket Status"
-                    register={register}
-                    name="ticketStatus"
-                    options={EventStatus}
-                    styles={styles}
-                  />
-                </div>
-                <div className="flex-none relative">
-                  <button
-                    onClick={() => remove(index)}
-                    type="button"
-                    className="inline-flex items-center justify-center h-10 w-10 bg-danger-500 text-lg border rounded border-danger-500 text-white"
-                  >
-                    <Icon icon="heroicons-outline:trash" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          <div className="ltr:text-right rtl:text-left">
-            <Button text="Submit" className="btn-dark" />
-          </div>
-        </form> */}
+      <Card title="Add Tickets">
         <div className="">
           <div className="px-4">
             <label className="form-label" id="timepicker">
@@ -117,10 +111,17 @@ const AddTicket = () => {
               className="react-select w-full"
               classNamePrefix="select"
               label="Event"
-              options={Events}
+              options={fields}
+              value={event}
+              getOptionLabel={(option) => option["event_name"]}
+              getOptionValue={(option) => option["event_id"]}
               styles={styles}
+              onChange={(e) => {
+                handleSelectChange("event", e._id);
+                console.log(event);
+              }}
               id="hh"
-              name="eventType"
+              name="event"
             />
           </div>
           <div className="w-full px-2 py-1 flex flex-wrap flex-column ">
@@ -130,10 +131,10 @@ const AddTicket = () => {
                   label="Ticket Name"
                   id="pn"
                   type="text"
-                  //   onChange={(e) => {
-                  //     handleChange(e);
-                  //     e.target.name = "eventName";
-                  //   }}
+                  onChange={(e) => {
+                    handleChange(e);
+                    e.target.name = "ticket_name";
+                  }}
                   placeholder="Add Ticket Name"
                 />
               </div>
@@ -142,10 +143,10 @@ const AddTicket = () => {
                   label="Ticket Price"
                   id="pn"
                   type="number"
-                  //   onChange={(e) => {
-                  //     handleChange(e);
-                  //     e.target.name = "eventName";
-                  //   }}
+                  onChange={(e) => {
+                    handleChange(e);
+                    e.target.name = "ticket_price";
+                  }}
                   placeholder="Add Ticket Price"
                 />
               </div>
@@ -158,7 +159,7 @@ const AddTicket = () => {
                   placeholder="Add Ticket Description"
                   onChange={(e) => {
                     handleChange(e);
-                    e.target.name = "eventDescription";
+                    e.target.name = "ticket_description";
                   }}
                 />
               </div>
@@ -172,7 +173,7 @@ const AddTicket = () => {
                   //   value={eventStartDate}
                   id="hf-picker"
                   className="form-control py-2"
-                  onChange={(date) => setEventStartDate(date)}
+                  onChange={(date) => setTicketStartDate(date)}
                   options={{
                     altInput: true,
                     altFormat: "F j, Y",
@@ -188,7 +189,7 @@ const AddTicket = () => {
                   //   value={eventEndDate}
                   id="hf-picker"
                   className="form-control py-2"
-                  onChange={(date) => setEventEndDate(date)}
+                  onChange={(date) => setTicketEndDate(date)}
                   options={{
                     altInput: true,
                     altFormat: "F j, Y",
@@ -200,7 +201,7 @@ const AddTicket = () => {
             <div className="w-full  py-1  flex md:flex-row flex-col flex-wrap gap-y-4 ">
               <div className="md:w-1/2 w-full px-2">
                 <Textinput
-                   label={
+                  label={
                     <div className="flex flex-row items-center">
                       <div className="mr-2">Ticket Quantity</div>
                       <div>
@@ -224,10 +225,10 @@ const AddTicket = () => {
                   }
                   id="pn"
                   type="number"
-                  //   onChange={(e) => {
-                  //     handleChange(e);
-                  //     e.target.name = "eventName";
-                  //   }}
+                  onChange={(e) => {
+                    handleChange(e);
+                    e.target.name = "ticket_quantity";
+                  }}
                   placeholder="Add Ticket Quantity"
                 />
               </div>
@@ -257,10 +258,10 @@ const AddTicket = () => {
                   }
                   id="pn"
                   type="number"
-                  //   onChange={(e) => {
-                  //     handleChange(e);
-                  //     e.target.name = "eventName";
-                  //   }}
+                  onChange={(e) => {
+                    handleChange(e);
+                    e.target.name = "ticket_max_purchase";
+                  }}
                   placeholder="Add Ticket Max Purchase"
                 />
               </div>
@@ -273,7 +274,7 @@ const AddTicket = () => {
                 <Button
                   text="Create Ticket"
                   className="btn-dark"
-                //   onClick={handleCreateEvent}
+                  onClick={handleTicketCreate}
                 />
               </div>
             </div>
