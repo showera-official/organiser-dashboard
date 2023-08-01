@@ -149,11 +149,12 @@ export default function AddEvent() {
         event_mode: eventType.value,
         event_timezone: "UTC",
         event_ticket_type: eventPayStatus.value,
-        event_start_date: eventStartDate,
-        event_end_date: eventEndDate,
+        event_start_date: eventStartDate.toDateString,
+        event_end_date: eventEndDate.toDateString,
         event_start_time: eventStartTime,
-        event_end_time: eventEndTime,
+        event_end_time: eventEndTime.toDateString,
         event_is_active: eventStatus.value,
+
         // eventVenue: formData.eventVenue + ", " + selectedCity + ", " + selectedState + ", " + selectedCountry,
       },
       {
@@ -276,7 +277,8 @@ export default function AddEvent() {
                     dateFormat: "H:i",
                     time_24hr: true,
                   }}
-                  onChange={(date) => setEventEndTime(date)}
+                  onChange={(date) => {setEventEndTime(date)
+                  console.log(eventEndTime)}}
                 />
               </div>
             </div>
@@ -486,9 +488,7 @@ export default function AddEvent() {
             </div>
           </div>
         </Card>
-        <div className="my-4">
-          <AddTicketType />
-        </div>
+        
       </div>
     </>
   );

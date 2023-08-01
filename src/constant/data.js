@@ -27,7 +27,7 @@ export const menuItems = [
     title: "Manage Events",
     isHide: true,
     icon: "heroicons-outline:pencil-square",
-    link: "email",
+    link: "manageEvent",
   },
   {
   title: "Add Tickets",
