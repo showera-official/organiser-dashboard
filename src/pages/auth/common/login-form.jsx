@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { handleLogin } from "./store";
 import { toast } from "react-toastify";
-import axios from "./axios";
+import axios from "../../../axios";
 import Loading from "@/components/Loading";
 import Cookies from "js-cookie";
 const phoneRegExp =
