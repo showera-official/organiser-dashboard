@@ -5,7 +5,8 @@ import { Icon } from "@iconify/react";
 import Tooltip from "@/components/ui/Tooltip";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import axios from "axios";
+
+import axios from "../../axios";
 // This is a modal to delete an event
 function DisableEventModal(props) {
   const id = props.id;
@@ -18,32 +19,23 @@ function DisableEventModal(props) {
       toast.error("Authorization token not found");
       return;
     }
-  
     axios
-      .put(`https://tame-teal-tortoise-wrap.cyclic.app/api/v1/event/toggle/${id}`, null, {
+      .put(`event/toggle/${id}`, JSON.stringify({}), {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: "Bearer " + Cookies.get("token"),
         },
       })
       .then((res) => {
-        // Check if the response contains valid JSON data
-        if (res.data) {
-          console.log(res.data);
-          toast.success("Success");
-        } else {
-          // Handle unexpected response data
-          toast.error("Unexpected response from the server");
-        }
+        toast.success("Event disabled successfully");
+        // close the modal
       })
       .catch((err) => {
-        if (err.response && err.response.data && err.response.data.message) {
-          toast.error(err.response.data.message);
-        } else {
-          toast.error("An error occurred");
-        }
+        toast.error("Something went wrong");
+        console.log(err);
       });
   };
+
   return (
     <>
       <Modal
@@ -82,7 +74,7 @@ function DisableEventModal(props) {
         <div className="mt-3 text-lg font-semibold">{props.name}</div>
         <div className="text-base text-slate-600 dark:text-slate-300">
           <div className="mt-3 text-sm font-thin">
-            This action will de-list this event from the website ?
+            This action will de-list this event from the website?
           </div>
         </div>
       </Modal>
