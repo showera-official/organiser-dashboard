@@ -4,7 +4,7 @@ import Textinput from "@/components/ui/Textinput";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "./axios";
+import axios from "../../../axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import Loading from "@/components/Loading";
