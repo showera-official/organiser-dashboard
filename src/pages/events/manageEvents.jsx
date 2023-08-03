@@ -10,7 +10,7 @@ import EditEvent from "./EditEvent";
 import { Link } from "react-router-dom";
 import Tooltip from "@/components/ui/Tooltip";
 import DisableEventModal from "./DisableEventModal";
-
+import EnableEventModal from "./EnableEventModal";
 // import loader and use it before rendering the data.
 const columns = [
   {
@@ -35,7 +35,7 @@ const rows = tableData.slice(0, 7);
 
 export default function manageEvents() {
   const [field, setFields] = useState(null);
- 
+
   useEffect(() => {
     axios
       .get("/event", {
@@ -50,9 +50,6 @@ export default function manageEvents() {
         setFields(res.data.data);
       });
   }, []);
-
-
-
 
   return !field ? (
     <Loading />
@@ -79,27 +76,31 @@ export default function manageEvents() {
                       className="hover:bg-slate-200 dark:hover:bg-slate-700"
                     >
                       <td className="table-td">{field.event_name}</td>
-                      <td className="table-td">{field.createdAt.split("T")[0]}</td>
+                      <td className="table-td">
+                        {field.createdAt.split("T")[0]}
+                      </td>
                       <td className="table-td ">
-                      <span className="block w-full">
-          <span
-            className={` inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 ${
-              field.event_is_active === 1
-                ? "text-success-500 bg-success-500"
-                : ""
-            } 
+                        <span className="block w-full">
+                          <span
+                            className={` inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 ${
+                              field.event_is_active === 1
+                                ? "text-success-500 bg-success-500"
+                                : ""
+                            } 
             ${
-             field.event_is_active === 0
+              field.event_is_active === 0
                 ? "text-warning-500 bg-warning-500"
                 : ""
             }
            
             
              `}
-          >
-            {field.event_is_active === 1 ? "Active" : "Disabled"}
-          </span>
-        </span>
+                          >
+                            {field.event_is_active === 1
+                              ? "Active"
+                              : "Disabled"}
+                          </span>
+                        </span>
                       </td>
                       <td className="table-td">
                         <div className="flex flex-row gap-x-1 align-middle">
@@ -123,11 +124,19 @@ export default function manageEvents() {
                             </Link>
                           </div>
                           <div className="w-1/2">
-                            <DisableEventModal
-                              id={field._id}
-                              name={field.event_name}
-                          icon={field.event_is_active == 1? "heroicons-outline:bookmark" : "heroicons-outline:bookmark-slash"}
-                            />
+                            {field.event_is_active == 1 ? (
+                              <DisableEventModal
+                                id={field._id}
+                                name={field.event_name}
+                                icon={"heroicons-outline:bookmark-slash"}
+                              />
+                            ) : (
+                              <EnableEventModal
+                                id={field._id}
+                                name={field.event_name}
+                                icon={"heroicons-outline:bookmark"}
+                              />
+                            )}
                           </div>
                         </div>
                       </td>
