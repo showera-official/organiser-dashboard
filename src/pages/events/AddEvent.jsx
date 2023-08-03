@@ -12,7 +12,7 @@ import Accordion from "@/components/ui/Accordion";
 import Button from "@/components/ui/Button";
 import { set } from "react-hook-form";
 import axios from "axios";
-import AddTicketType from "./addTicketType";
+
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
@@ -81,8 +81,6 @@ export default function AddEvent() {
     }
   };
 
-
-
   const styles = {
     option: (provided, state) => ({
       ...provided,
@@ -113,7 +111,6 @@ export default function AddEvent() {
 
     setIsSubmitting(true);
 
-   
     if (
       eventType.value === "offline" &&
       (!selectedCountry || !selectedState || !selectedCity)
@@ -122,7 +119,6 @@ export default function AddEvent() {
       setIsSubmitting(false);
       return toast.error("Please fill all the fields");
     }
-
 
     if (
       eventLink.match(
@@ -144,26 +140,28 @@ export default function AddEvent() {
     // passwrod regex only numbers
 
     axios
-      .post("https://tame-teal-tortoise-wrap.cyclic.app/api/v1/event/create", {
-        event_name: formData.eventName,
-        event_mode: eventType.value,
-        event_timezone: "UTC",
-        event_ticket_type: eventPayStatus.value,
-        event_start_date: eventStartDate.toDateString,
-        event_end_date: eventEndDate.toDateString,
-        event_start_time: eventStartTime,
-        event_end_time: eventEndTime.toDateString,
-        event_is_active: eventStatus.value,
+      .post(
+        "https://tame-teal-tortoise-wrap.cyclic.app/api/v1/event/create",
+        {
+          event_name: formData.eventName,
+          event_mode: eventType.value,
+          event_timezone: "UTC",
+          event_ticket_type: eventPayStatus.value,
+          event_start_date: eventStartDate.toDateString,
+          event_end_date: eventEndDate.toDateString,
+          event_start_time: eventStartTime,
+          event_end_time: eventEndTime.toDateString,
+          event_is_active: eventStatus.value,
 
-        // eventVenue: formData.eventVenue + ", " + selectedCity + ", " + selectedState + ", " + selectedCountry,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("token")}`,
+          // eventVenue: formData.eventVenue + ", " + selectedCity + ", " + selectedState + ", " + selectedCountry,
         },
-      }
-    )
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      )
       .then((res) => {
         setLoading(false);
         console.log(res.data);
@@ -277,8 +275,10 @@ export default function AddEvent() {
                     dateFormat: "H:i",
                     time_24hr: true,
                   }}
-                  onChange={(date) => {setEventEndTime(date)
-                  console.log(eventEndTime)}}
+                  onChange={(date) => {
+                    setEventEndTime(date);
+                    console.log(eventEndTime);
+                  }}
                 />
               </div>
             </div>
@@ -488,7 +488,6 @@ export default function AddEvent() {
             </div>
           </div>
         </Card>
-        
       </div>
     </>
   );
